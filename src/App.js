@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { UserInput } from './components/UserInput/UserInput';
+import { UserOutput } from './components/UserOutput/UserOutput';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  // adding of state to the App Component
+  state = {
+    users: [
+      { username: "Wandecoal" },
+    ],
+
+    users_two: [
+      { username: "Davido" }
+    ]
+  }
+
+  // function to add change event handler to manipulate the state of the first user
+  switchUserName = (e) => {
+    this.setState({
+      users: [
+        { username: e.target.value },
+      ]
+    }) 
+  }
+
+  // function to add change event handler to manipulate the state of the second user
+  switchUserName2 = (e) => {
+    this.setState({
+      users_two: [
+        { username: e.target.value }
+      ]
+    })
+  }
+  // function to render the components of the App component
+  
+  render() {
+    return (
+      <div className=' flex justify-center items-center bg-slate-400 h-screen'>
+        <div className=' bg-red-500 p-12 rounded-xl outline-none text-center'>
+          <UserOutput username={this.state.users[0].username} />
+
+          <UserInput change={this.switchUserName} />
+
+          <UserOutput username={this.state.users_two[0].username} />
+
+          <UserInput change={this.switchUserName2} />
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
+
+
